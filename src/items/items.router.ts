@@ -24,7 +24,7 @@ itemsRouter.get('/', async (req: Request, res: Response) => {
       { id: 3, name: 'MacBook 2020 8GB RAM, 512GB' },
       { id: 4, name: 'Magic Keyboad English' },
       { id: 5, name: 'Magic Mouse' },
-      { id: 6, name: 'Magic Trackpad 2' },
+      { id: 6, name: 'Magic Trackpad 2xxxx' },
     ];
 
     res.status(200).send(items);
