@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+
     environment:
       - DEBUG=app:*
       - PORT=3000
@@ -12,14 +13,9 @@ services:
     # ホスト側のポート:コンテナのポート
     ports:
       - '3000:3000'
-
-    # ソースコードを格納するフォルダをマウント
-    #（ホスト側の./srcをコンテナの/appにマウント）
     volumes:
       - .:/app
+      - ~/.ssh:/tmp/.ssh
 
-    # 起動時のカレントフォルダを指定
     working_dir: /app
-
-    # 起動後に実行するコマンドを指定
     command: npm run dev
