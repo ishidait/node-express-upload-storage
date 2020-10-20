@@ -1,19 +1,12 @@
-/**
- * Required External Modules and Interfaces
- */
 import express, { Request, Response } from 'express';
 // import * as ItemService from "./items.service";
 // import { Item } from "./item.interface";
 // import { Items } from "./items.interface";
 
-/**
- * Router Definition
- */
+/** Router Definition */
 export const itemsRouter = express.Router();
 
-/**
- * Controller Definitions
- */
+/** Controller Definitions */
 
 // GET items/
 itemsRouter.get('/', async (req: Request, res: Response) => {
@@ -24,7 +17,7 @@ itemsRouter.get('/', async (req: Request, res: Response) => {
       { id: 3, name: 'MacBook 2020 8GB RAM, 512GB' },
       { id: 4, name: 'Magic Keyboad English' },
       { id: 5, name: 'Magic Mouse' },
-      { id: 6, name: 'Magic Trackpad 2xxxx' },
+      { id: 6, name: 'Magic Trackpad 2' },
     ];
 
     res.status(200).send(items);

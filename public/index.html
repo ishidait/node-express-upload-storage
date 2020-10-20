@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' "
+    />
+    <title>Upload Example</title>
+
+    <style>
+      body {
+        box-sizing: border-box;
+        background-color: lightyellow;
+      }
+
+      .result {
+        padding: 1rem;
+        color: blue;
+      }
+      .result.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Upload Example</h1>
+    <hr />
+    <div>
+      <input type="file" id="upload" multiple />
+      <input type="button" id="uploadButton" value="Upload" />
+      <div class="result"></div>
+    </div>
+
+    <script src="client.js"></script>
+  </body>
+</html>

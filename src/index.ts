@@ -1,9 +1,10 @@
-/** Required External Modules */
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
 import { itemsRouter } from './items/items.router';
+import { uploadRouter } from './upload/upload.router';
 import { errorHandler } from './middleware/error.middleware';
 import { notFoundHandler } from './middleware/notFound.middleware';
 
@@ -19,7 +20,11 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.use('/items', itemsRouter);
+app.use('/upload', uploadRouter);
+
 app.use(errorHandler);
 app.use(notFoundHandler);
 
