@@ -28,4 +28,4 @@ Open http://localhost:3000 in a browser.
 
 ## Note:
 
-You should create a .env file and put your access keys etc in there before running the container.
+You should create a .env file in the root folder and put your access keys etc before running the container.
