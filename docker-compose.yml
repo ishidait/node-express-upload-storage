@@ -3,8 +3,10 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.dev
 
+    env_file:
+      - .env
     environment:
       - DEBUG=app:*
       - PORT=3000

@@ -1,0 +1,8 @@
+# Exclude everything
+*
+
+# Then include only what are necessary to build
+!package.json
+!dist/
+!public/
+
