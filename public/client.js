@@ -8,11 +8,15 @@ const ready = callback => {
 ready(() => {
   console.log('loaded');
 
-  const uploadButton = document.querySelector('#uploadButton');
+  const uploadToDisk = document.querySelector('#uploadToDisk');
+  const uploadToAWS = document.querySelector('#uploadToAWS');
+  const uploadToAzure = document.querySelector('#uploadToAzure');
+  const uploadToGCP = document.querySelector('#uploadToGCP');
   const fileInput = document.querySelector('input[type="file"]');
   const result = document.querySelector('.result');
 
-  uploadButton.addEventListener('click', () => {
+  handleClick = e => {
+    const target = e.target.dataset.target;
     result.classList.remove('error');
     result.innerHTML = 'Uploading...';
 
@@ -22,7 +26,7 @@ ready(() => {
       formData.append('files', files[i]);
     }
 
-    fetch('/upload', {
+    fetch(`/upload/${target}`, {
       method: 'POST',
       body: formData,
     })
@@ -41,5 +45,10 @@ ready(() => {
         result.innerHTML = `Error: ${err.message}`;
         result.classList.add('error');
       });
-  });
+  };
+
+  uploadToDisk.addEventListener('click', handleClick);
+  uploadToAWS.addEventListener('click', handleClick);
+  uploadToAzure.addEventListener('click', handleClick);
+  uploadToGCP.addEventListener('click', handleClick);
 });

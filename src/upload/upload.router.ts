@@ -1,43 +1,34 @@
 import path from 'path';
-import express from 'express';
-import multer from 'multer';
-import multerS3 from 'multer-s3';
-import * as AWS from 'aws-sdk';
-
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_S3_SECRET_KEY,
-  region: 'us-west-1',
-});
-const bucketName = process.env.AWS_S3_BUCKET ?? '';
+import express, { RequestHandler } from 'express';
+import multer, { Multer } from 'multer';
+import { uploadToAWS } from './multer-aws';
+import { uploadToAzure } from './multer-azure';
+import { uploadGCP } from './multer-gcp';
 
 export const uploadRouter = express.Router();
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, './uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-//   },
-// });
+const storageDisk = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
 
-const upload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: bucketName,
-    metadata: (req, file, cb) => {
-      cb(null, { appName: 'node-express-upload-storage' }); // Put any metadata here.
-    },
-    key: (req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
-    },
-  }),
+const uploadToDisk = multer({
+  storage: storageDisk,
   limits: { fileSize: 10 * 1024 * 1024, files: 10 }, // Max. 10MB x 10 files
 });
 
-uploadRouter.post('/', upload.array('files'), function (req, res, next) {
+const handler: RequestHandler = (req, res) => {
   console.log(req.files);
   console.log(req.body);
+
   res.json({ result: 'success', msg: `${req.files.length} files uploaded` });
-});
+};
+
+uploadRouter.post('/disk', uploadToDisk.array('files'), handler);
+uploadRouter.post('/aws', uploadToAWS.array('files'), handler);
+uploadRouter.post('/azure', uploadToAzure.array('files'), handler);
+uploadRouter.post('/gcp', uploadGCP.array('files'), handler);

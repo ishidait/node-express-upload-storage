@@ -18,6 +18,7 @@ services:
     volumes:
       - .:/app
       - ~/.ssh:/tmp/.ssh
+      - ../gcp_key.json:/tmp/gcp_key.json
 
     working_dir: /app
     command: npm run dev
