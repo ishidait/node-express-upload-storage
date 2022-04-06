@@ -17,7 +17,7 @@ services:
       - '3000:3000'
     volumes:
       - .:/app
-      - ~/.ssh:/tmp/.ssh
+      # - ~/.ssh:/tmp/.ssh
       - ../gcp_key.json:/tmp/gcp_key.json
 
     working_dir: /app
