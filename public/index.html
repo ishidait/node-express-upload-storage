@@ -18,6 +18,11 @@
         background-color: lightyellow;
       }
 
+      .app {
+        display: grid;
+        grid-row-gap: 1rem;
+      }
+
       .result {
         padding: 1rem;
         color: blue;
@@ -30,12 +35,14 @@
   <body>
     <h1>Upload Example</h1>
     <hr />
-    <div>
+    <div class="app">
       <input type="file" id="upload" multiple />
-      <input type="button" id="uploadToDisk" value="Upload to disk" data-target="disk" />
-      <input type="button" id="uploadToAWS" value="Upload to AWS" data-target="aws" />
-      <input type="button" id="uploadToAzure" value="Upload to Azure" data-target="azure" />
-      <input type="button" id="uploadToGCP" value="Upload to GCP" data-target="gcp" />
+      <div>
+        <input type="button" id="uploadToDisk" value="Upload to disk" data-target="disk" />
+        <input type="button" id="uploadToAWS" value="Upload to AWS" data-target="aws" />
+        <input type="button" id="uploadToAzure" value="Upload to Azure" data-target="azure" />
+        <input type="button" id="uploadToGCP" value="Upload to GCP" data-target="gcp" />
+      </div>
       <div class="result"></div>
     </div>
 

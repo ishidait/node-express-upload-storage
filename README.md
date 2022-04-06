@@ -16,6 +16,8 @@ An example Node.js app that receives uploaded files and stores them into cloud s
 
 Open http://localhost:3000 in a browser.
 
+Close the container after developing.
+
 > docker-compose down
 
 # Develop with VSCode Remote Container extension
@@ -28,4 +30,4 @@ Open http://localhost:3000 in a browser.
 
 ## Note:
 
-You should create a .env file in the root folder and put your access keys etc before running the container.
+You should create a .env file in the root folder and put your access keys etc before running the container. Use .env.example as a template.
